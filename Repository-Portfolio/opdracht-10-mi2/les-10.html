@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Opdracht 10</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+    <script>
+        "use strict";
+        $(document).ready(function () {
+            $("#raam").click(function () {
+
+
+                $("#raam").attr("src", "raam2.jpg");
+            });
+
+
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <script>
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: 'wagens.JSON',
+            success: verwerkJSON
+        });
+
+        function verwerkJSON(response) {
+            for (var i = 0; i < response.belgischemerken.length; i++) {
+                $('#automerken').append("<input type='checkbox' name='belgischeMerken' id='" + response.belgischemerken[i] + "'>");
+                $('#automerken').append("<label for='" + response.belgischemerken[i] + "'>" + response.belgischemerken[i] + "</label>");
+
+            }
+        }
+
+
+        $("#optellen").click(function () {
+            $("#vinkjes").text($("input:checked").length);
+            $("#popupBasic").popup("open");
+        });
+    </script>
+    <div data-role="page" id="page1">
+        <div data-role="header">
+            <h1>Page 1</h1>
+        </div>
+
+        <div data-role="content">
+            <h2>Redouan Kanaa</h2>
+            <p>Dag, iedereen</p>
+            <p>Ik ben Redouan kanaa en ik studeer toegepast informatica aan het hogeschool odisee.</p>
+            <img src="redouan.jpg">
+            <div data-role="footer">
+                <a href="#page1">Page1</a>
+                <a href="#page2">Page2</a>
+                <a href="#page3">Page3</a>
+                <a href="#page4">Page4</a>
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="page2">
+        <div data-role="header">
+            <h1>Pagina 2</h1>
+        </div>
+
+        <div data-role="content">
+            <img id="raam" src="raam.jpg" alt="raam" width="200px" height="200px">
+
+        </div>
+
+        <div data-role="footer">
+            <a href="#page1">Page1</a>
+            <a href="#page2">Page2</a>
+            <a href="#page3">Page3</a>
+            <a href="#page4">Page4</a>
+        </div>
+    </div>
+    <div data-role="page" id="page3">
+        <div data-role="header">
+            <h1>Pagina 3</h1>
+        </div>
+        <style>
+            h3 {
+                text-align: center;
+            }
+        </style>
+        <div data-role="content">
+            <h3>Wil je venster terug sluiten?</h3>
+            <a href="#page2" class="ui-btn" data-transition="slideup">Ja</a>
+            <a href="#nee" class="ui-btn" data-transition="pop">Neen</a>
+            <a href="#idk" class="ui-btn" data-transition="pop" data-rel="dialog" data-role="button">Ik weet het niet :$</a>
+        </div>
+
+    </div>
+    <div data-role="page" id="nee">
+        <div data-role="header">
+            <h1>Ben je zeker dat je venster niet wilt sluiten?’</h1>
+        </div>
+        <div data-role="content">
+            <p>
+                <a href="#page1" data-role="button">ja</a>
+                <a href="#nee2" data-role="button">neen</a>
+                <a href="#idk" data-role="button" data-rel="dialog"></a>
+            </p>
+        </div>
+
+    </div>
+    <div data-role="page" id="page4">
+        <div data-role="header">
+            <h1>Pagina 4</h1>
+        </div>
+
+        <div data-role="content">
+            <form>
+
+
+                <div id="automerken"></div>
+
+            </form>
+
+            <button id="optellen">
+                Hoeveel?
+            </button>
+            <div data-role="popup" id="popupBasic">
+                <p>
+                    Je kent <span id="vinkjes"></span> automerken
+                </p>
+            </div>
+        </div>
+
+        <div data-role="footer">
+            <a href="#page1">Pagina 1</a>
+            <a href="#page2">Pagina 2</a>
+            <a href="#page3">Pagina 3</a>
+            <a href="#page4">Pagina 4</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
